@@ -27,7 +27,7 @@ export const CounterEffect = () => {
     
     return (
         <>
-            <h1>CounterEffect</h1>
+            <h1>CounterEffect:</h1>
             <h2 ref={ counterElement }>{ counter }</h2>
 
             <button onClick={ handleClick }>
