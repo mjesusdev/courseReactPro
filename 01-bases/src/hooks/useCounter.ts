@@ -21,7 +21,7 @@ export const useCounter = ({ maxCount = 10 }) => {
     }, [counter])
 
     useEffect(() => {
-        if ( counter < maxCount ) return;
+        /* if ( counter < maxCount ) return; */
         tl.current.play(0)
     }, [counter])
 
