@@ -1,8 +1,8 @@
+@import url(https://fonts.bunny.net/css?family=andika:400);
+
 html,body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: 'Andika', sans-serif;
   background-color: #282c34;
   color: white;
   -webkit-font-smoothing: antialiased;
@@ -10,10 +10,8 @@ html,body {
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
-
 
 .main-layout {
   display: flex;
