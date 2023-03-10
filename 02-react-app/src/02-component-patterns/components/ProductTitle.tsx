@@ -3,7 +3,7 @@ import { ProductContext } from './ProductCard';
 
 import styles from '../styles/styles.module.css';
 
-export const ProductTitle = ({ title }: { title: string }) => {
+export const ProductTitle = ({ title }: { title?: string }) => {
     
     const { product } = useContext( ProductContext )
 
