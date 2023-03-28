@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { ProductCard, ProductImage, ProductTitle, ProductButtons } from '../components';
 
 import { Product } from '../interfaces/interfaces';
@@ -17,7 +18,18 @@ const product2 = {
 
 const products: Product[] = [ product1, product2 ]
 
+interface ProductInCard extends Product {
+    count: number
+}
+
 export const ShoppingPage = () => {
+
+    const [ shoppingCard, setShoppingCard ] = useState<{ [key:string]: ProductInCard }>({});
+
+    const onProductCountChange = () => {
+
+    }
+
     return (
         <div>
             <h1>Shopping Store</h1>
@@ -35,6 +47,7 @@ export const ShoppingPage = () => {
                             className="bg-dark text-white"
                             product={ product }
                             key={ product.id }
+                            onChange={ onProductCountChange }
                         >
                             <ProductImage className="custom-image" style={{ boxShadow: '10px 10px 10px rgba(0,0,0,0.2)' }} />
                             <ProductTitle className="text-bold" />
@@ -50,6 +63,7 @@ export const ShoppingPage = () => {
                     className="bg-dark text-white"
                     product={ product1 }
                     style={{ width: '100px' }}
+                    
                 >
                     <ProductImage className="custom-image" style={{ boxShadow: '10px 10px 10px rgba(0,0,0,0.2)' }} />
                     <ProductButtons className="custom-buttons" />
