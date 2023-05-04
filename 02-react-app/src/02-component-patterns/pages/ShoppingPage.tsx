@@ -23,11 +23,10 @@ interface ProductInCard extends Product {
 }
 
 export const ShoppingPage = () => {
-
     const [ shoppingCard, setShoppingCard ] = useState<{ [key:string]: ProductInCard }>({});
 
-    const onProductCountChange = () => {
-
+    const onProductCountChange = ({ count, product }: { count:number, product: Product } ) => {
+        console.log(count, product);
     }
 
     return (
@@ -47,7 +46,7 @@ export const ShoppingPage = () => {
                             className="bg-dark text-white"
                             product={ product }
                             key={ product.id }
-                            onChange={ onProductCountChange }
+                            onChange={ () => onProductCountChange }
                         >
                             <ProductImage className="custom-image" style={{ boxShadow: '10px 10px 10px rgba(0,0,0,0.2)' }} />
                             <ProductTitle className="text-bold" />
@@ -55,7 +54,6 @@ export const ShoppingPage = () => {
                         </ProductCard>
                     ))
                 }
-
             </div>
 
             <div className="shopping-cart">
