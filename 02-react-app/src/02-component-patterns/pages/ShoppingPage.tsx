@@ -23,10 +23,20 @@ interface ProductInCard extends Product {
 }
 
 export const ShoppingPage = () => {
-    const [ shoppingCard, setShoppingCard ] = useState<{ [key:string]: ProductInCard }>({});
+    const [ shoppingCart, setShoppingCart ] = useState<{ [key:string]: ProductInCard }>({});
 
-    const onProductCountChange = ({ count, product }: { count:number, product: Product } ) => {
-        console.log(count, product);
+    const onProductCountChange = ({ count, product }: { count: number, product: Product } ) => {
+        setShoppingCart( oldShoppingCard => {
+            if ( count === 0 ) {
+                const { [product.id]: toDelete, ...rest } = oldShoppingCard
+                return rest
+            }
+
+            return {
+                ...oldShoppingCard,
+                [ product.id ]: { ...product, count }
+            }
+        })
     }
 
     return (
@@ -46,35 +56,33 @@ export const ShoppingPage = () => {
                             className="bg-dark text-white"
                             product={ product }
                             key={ product.id }
-                            onChange={ () => onProductCountChange }
+                            onChange={ onProductCountChange }
+                            value={ shoppingCart[product.id]?.count || 0 }
                         >
-                            <ProductImage className="custom-image" style={{ boxShadow: '10px 10px 10px rgba(0,0,0,0.2)' }} />
-                            <ProductTitle className="text-bold" />
-                            <ProductButtons className="custom-buttons" />
+                            <ProductImage className='custom-image' style={{ boxShadow: '10px 10px 10px rgba(0,0,0,0.2)' }} />
+                            <ProductTitle className='text-bold' />
+                            <ProductButtons className='custom-buttons' />
                         </ProductCard>
                     ))
                 }
             </div>
 
-            <div className="shopping-cart">
-                <ProductCard 
-                    className="bg-dark text-white"
-                    product={ product1 }
-                    style={{ width: '100px' }}
-                    
-                >
-                    <ProductImage className="custom-image" style={{ boxShadow: '10px 10px 10px rgba(0,0,0,0.2)' }} />
-                    <ProductButtons className="custom-buttons" />
-                </ProductCard>
-                
-                <ProductCard 
-                    className="bg-dark text-white"
-                    product={ product2 }
-                    style={{ width: '100px' }}
-                >
-                    <ProductImage className="custom-image" style={{ boxShadow: '10px 10px 10px rgba(0,0,0,0.2)' }} />
-                    <ProductButtons className="custom-buttons" />
-                </ProductCard>
+            <div className='shopping-cart'>
+                {
+                    Object.entries( shoppingCart ).map( ([ key, product ]) => 
+                        <ProductCard
+                            className='bg-dark text-white'
+                            key={ key }
+                            product={ product }
+                            style={{ width: '100px' }}
+                            onChange={ onProductCountChange }
+                            value={ product.count }
+                        >
+                            <ProductImage className='custom-image' style={{ boxShadow: '10px 10px 10px rgba(0,0,0,0.2)' }} />
+                            <ProductButtons className='custom-buttons' />
+                        </ProductCard>
+                    )
+                }
             </div>
         </div>
     )
